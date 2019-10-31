@@ -38,6 +38,9 @@ export class Skier extends Entity {
             case Constants.SKIER_DIRECTIONS.RIGHT:
                 this.moveSkierRight();
                 break;
+            case Constants.SKIER_DIRECTIONS.UP:
+                this.moveSkierUp();
+                break;
         }
     }
 
@@ -64,7 +67,7 @@ export class Skier extends Entity {
     }
 
     moveSkierUp() {
-        this.y -= Constants.SKIER_STARTING_SPEED;
+        this.y += this.speed;
     }
 
     turnLeft() {
@@ -76,13 +79,16 @@ export class Skier extends Entity {
     }
 
     turnUp() {
-        if(this.direction === Constants.SKIER_DIRECTIONS.LEFT || this.direction === Constants.SKIER_DIRECTIONS.RIGHT) {
-            this.moveSkierUp();
-        }
+        this.setDirection(Constants.SKIER_DIRECTIONS.UP);
     }
 
     turnDown() {
         this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
+    }
+
+    CheckIfSkierShouldJump(obstacleName) {
+        if(this.direction === Constants.SKIER_DIRECTIONS.UP
+            && (obstacleName === Constants.ROCK1 || obstacleName === Constants.ROCK2)) return true;
     }
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {
@@ -95,7 +101,8 @@ export class Skier extends Entity {
         );
 
         const collision = obstacleManager.getObstacles().find((obstacle) => {
-            const obstacleAsset = assetManager.getAsset(obstacle.getAssetName());
+            const obstacleName = obstacle.getAssetName();
+            const obstacleAsset = assetManager.getAsset(obstacleName);
             const obstaclePosition = obstacle.getPosition();
             const obstacleBounds = new Rect(
                 obstaclePosition.x - obstacleAsset.width / 2,
@@ -103,8 +110,12 @@ export class Skier extends Entity {
                 obstaclePosition.x + obstacleAsset.width / 2,
                 obstaclePosition.y
             );
+            const checkIfTwoRectsntersect = intersectTwoRects(skierBounds, obstacleBounds);
 
-            return intersectTwoRects(skierBounds, obstacleBounds);
+            if(checkIfTwoRectsntersect && this.CheckIfSkierShouldJump(obstacleName)) return false;
+            
+            return checkIfTwoRectsntersect
+
         });
 
         if(collision) {
