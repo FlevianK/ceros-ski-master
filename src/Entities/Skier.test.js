@@ -11,23 +11,23 @@ describe('Skier direction when', () => {
     right_speed = 10;
   })
   
-  test('left arrow key is pressed', () => {
+  test('left arrow key is pressed maps to 1 and faces left side', () => {
     skier.turnLeft();
     expect(skier.direction).toBe(left_val);
   });
   
-  test('right arrow key is pressed', () => {
+  test('right arrow key is pressed maps to 5 and faces right side', () => {
     skier.turnRight();
     expect(skier.direction).toBe(right_val);
   });
 
-  test('right arrow key is pressed', () => {
+  test('facing left side goes towards negative infinity', () => {
     skier.turnLeft();
     skier.move();
     expect(skier.x).toBe(left_speed);
   });
 
-  test('right arrow key is pressed', () => {
+  test('facing right side goes towards positive infinity', () => {
     skier.turnRight();
     skier.move();
     expect(skier.x).toBe(right_speed);
