@@ -86,9 +86,20 @@ export class Skier extends Entity {
         this.setDirection(Constants.SKIER_DIRECTIONS.DOWN);
     }
 
-    CheckIfSkierShouldJump(obstacleName) {
+    setSkierJumpOverRock(obstacleName) {
         if(this.direction === Constants.SKIER_DIRECTIONS.UP
             && (obstacleName === Constants.ROCK1 || obstacleName === Constants.ROCK2)) return true;
+    }
+
+    makeSkierJumpIfHitRamp(obstacleName) {
+        if(obstacleName === Constants.JUMP_RAMP) {
+           this.turnUp()
+           return true
+        }
+    }
+
+    CheckIfSkierShouldJump(obstacleName) {
+        return (this.setSkierJumpOverRock(obstacleName) || this.makeSkierJumpIfHitRamp(obstacleName));
     }
 
     checkIfSkierHitObstacle(obstacleManager, assetManager) {

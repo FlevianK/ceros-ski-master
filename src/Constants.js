@@ -12,7 +12,7 @@ export const TREE_CLUSTER = 'treeCluster';
 export const ROCK1 = 'rock1';
 export const ROCK2 = 'rock2';
 export const SKIER_UP = 'skierUp';
-
+export const JUMP_RAMP = 'jumpRamp';
 
 export const SKIER_STARTING_SPEED = 10;
 export const SKIER_DIAGONAL_SPEED_REDUCER = 1.4142;
@@ -27,7 +27,9 @@ export const ASSETS = {
     [TREE] : 'img/tree_1.png',
     [TREE_CLUSTER] : 'img/tree_cluster.png',
     [ROCK1] : 'img/rock_1.png',
-    [ROCK2] : 'img/rock_2.png'
+    [ROCK2] : 'img/rock_2.png',
+    [SKIER_UP]: 'img/skier_jump_1.png',
+    [JUMP_RAMP] : 'img/jump_ramp.png'
 };
 
 export const SKIER_DIRECTIONS = {
