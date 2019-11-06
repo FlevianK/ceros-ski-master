@@ -47,7 +47,7 @@ export class Game {
         this.skier.checkIfSkierHitObstacle(this.obstacleManager, this.assetManager);
 
         this.rhino.move(this.skier);
-        this.rhino.endIfRhinocatchSkier(this.assetManager, this.skier);
+        this.rhino.endIfRhinoCatchSkier(this.assetManager, this.skier);
         this.rhino.updateAction(this.skier);
     }
 
