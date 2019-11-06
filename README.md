@@ -12,6 +12,50 @@ npm install
 npm run dev
 ```
 
+**Work Done**
+* **Fixed two bug:**
+
+> Left arrow key functionality was broken
+* Steps to Reproduce:
+    1. Load the game
+    2. Crash into an obstacle
+    3. Press the left arrow key
+  * Expected Result: The skier gets up and is facing to the left
+  * Actual Result: Giant blizzard occurs causing the screen to turn completely white (or maybe the game just crashes!)
+
+> Right arrow key functionality broke after fixing left arrow key functionality
+* Steps to Reproduce:
+    1. Load the game
+    2. Crash into an obstacle
+    3. Press the right arrow key
+  * Expected Result: The skier gets up and is facing to the right
+  * Actual Result: The skier gets up and is facing to the left
+
+> https://github.com/FlevianK/ceros-ski-master/pull/3
+
+* **Wrote unit tests for the bugs mentioned above:**
+
+* Added unit tests to ensure that the above mentioned bugs do not come back.
+
+* **Extended existing functionality:**
+
+> Added skier ability to jump
+
+* When up key is pressed or when skier hits a ramp he jumps, the skier is able to jump over rocks only while on air
+* Added some tests added functionality does not break
+
+> https://github.com/FlevianK/ceros-ski-master/pull/4
+
+* **Built something new:**
+
+> Introduces new functionality: Rhino appears to eat skier
+* The Rhino appear after a 3000 distance covered by skier and chase the skier
+* Later, rhino catches the skier, eats him and the game ends
+* Added some tests
+
+> https://github.com/FlevianK/ceros-ski-master/pull/5
+
+
 There is no exact time limit on this challenge and we understand that everyone has varying levels of free time. We'd 
 rather you take the time and produce a solution up to your ability than rush and turn in a suboptimal challenge. Please 
 look through the requirements below and let us know when you will have something for us to look at. If anything is 
