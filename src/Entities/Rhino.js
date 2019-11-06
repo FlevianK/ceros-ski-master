@@ -3,6 +3,7 @@ import { Entity } from "./Entity";
 import { intersectTwoRects, Rect } from "../Core/Utils";
 
 const RHINO_SKIER_STARTING_DISTANCE = 3000;
+const ACTION_DURATION = 700
 
 export class Rhino extends Entity {
 	assetName = Constants.RHINO_RUN_LEFT;
@@ -99,5 +100,31 @@ export class Rhino extends Entity {
 
 	updateAsset() {
 		this.assetName = Constants.RHINO_ACTION_ASSET[this.action];
+	}
+	
+	updateAction(skier) {
+		if(this.action) {
+			this.removeSkier(skier)
+			switch(this.action) {
+				case Constants.RHINO_ACTIONS.LIFT_SKIER:
+					this.changeAction(Constants.RHINO_ACTIONS.LIFT_MOUTH_OPEN_SKIER);
+					break;
+				case Constants.RHINO_ACTIONS.LIFT_MOUTH_OPEN_SKIER:
+					this.changeAction(Constants.RHINO_ACTIONS.CHEW_SKIER);
+					break;
+				case Constants.RHINO_ACTIONS.CHEW_SKIER:
+					this.changeAction(Constants.RHINO_ACTIONS.SWALLOW_SKIER);
+					break;
+				case Constants.RHINO_ACTIONS.SWALLOW_SKIER:
+					this.changeAction(Constants.RHINO_ACTIONS.END);
+					break;
+			}
+		}
+		
+	}
+
+	changeAction(rhinoAction) {
+		var _this = this;
+		setTimeout(function(){_this.setAction(rhinoAction);}, ACTION_DURATION);
 	}
 }
